@@ -35,4 +35,13 @@ func TestAIO(t *testing.T) {
 	if buf.String() != foobar {
 		t.Errorf("expecting string %s, got %s instead", foobar, buf.String())
 	}
+	if err := s.Delete(r); err != nil {
+		t.Fatal(err)
+	}
+	// This write should not be notified
+	w.Write([]byte(foobar))
+	s.Wait(0)
+	if buf.String() != foobar {
+		t.Errorf("expecting string %s, got %s instead", foobar, buf.String())
+	}
 }
