@@ -5,6 +5,8 @@ import (
 	"os"
 )
 
+// Fd returns the underlying OS file descriptor for the given file.
+// Currently, only *os.File is supported.
 func Fd(file interface{}) (int, error) {
 	if f, ok := file.(*os.File); ok {
 		return int(f.Fd()), nil

@@ -7,10 +7,14 @@ import (
 	"syscall"
 )
 
+// PipeFlag might be used to specify options when creating
+// a pipe.
 type PipeFlag int
 
 const (
+	// ReadNonBlock causes the read end of the pipe to be non-blocking.
 	ReadNonBlock PipeFlag = 1 << iota
+	// ReadNonBlock causes the write end of the pipe to be non-blocking.
 	WriteNonBlock
 )
 
