@@ -94,7 +94,9 @@ func (s *Set) Wait(duration time.Duration) ([]*Event, error) {
 	}
 	events := make([]*Event, len(ev))
 	for ii, v := range ev {
+		s.mu.RLock()
 		data := s.data[v.fd]
+		s.mu.RUnlock()
 		e := &Event{
 			File:  data.file,
 			Flags: v.flags,
